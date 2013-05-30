@@ -1,0 +1,24 @@
+
+* For all functions, non-primitive parameters that are only to be referenced should always
+	be passed by a const reference, never by pointer or by copy.
+
+* For stateless functions, any parameter that might be modified by the method should be passed
+	by normal reference. This indicates temporary access, not ownership.
+
+* For stateful functions, any parameter that's meant to be stored as part of state should be
+	passed by pointer. This indicates a full reference, ownership is contextual.
+
+
+
+* For all functions, non-primitive return types should be return-by-const-reference. If the object
+	is to be modified or there is transfer of ownership, the object should be returned by pointer.
+
+
+tl;dr:
+= Pointers generally indicate full ownership (which may be shared ownership.) or extended
+	reference, which are considered to be approximately the same.
+= Const references indicate only references to value.
+= A normal reference indicates full access, but not ownership.
+
+
+* C++11 has the 'override' keyword in the spec. Use it.

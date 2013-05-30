@@ -12,8 +12,11 @@
 *.la
 *.a
 
-# VS Compiler Intermediate Files
+# Visual Studio Files
 Intermediate/
+*.filters
+*.user
+*.suo
 
 # Binaries
 bin/
