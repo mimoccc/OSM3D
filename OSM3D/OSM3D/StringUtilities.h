@@ -8,12 +8,12 @@ typedef std::vector<std::string> StringSet;
 
 namespace StringUtilities
 {
-	StringSet * SplitStringAtSymbol (std::string text, std::string symbol, StringSet * resultsOutOptional = NULL);
-	uint		GetTermCount (std::string text, std::string term);
-	std::string EliminateSymbolFromString (std::string text, std::string symbol);
-	std::string ConvergeStringSet (StringSet * stringSet, std::string separator = "");
-	std::string ReplaceAllOfSymbolInString (std::string string, std::string targetSymbol, std::string replacementSymbol);
-	std::string GetStringComponentBySeparatorIndex (std::string str, int index, std::string separator);
+	void		SplitStringAtSymbol( const std::string & text, const std::string & symbol, StringSet & resultsOut );
+	uint		GetTermCount( const std::string & text, const std::string & term );
+	std::string EliminateSymbolFromString( const std::string & text, const std::string & symbol );
+	std::string ConvergeStringSet( const StringSet & stringSet, const std::string & separator = "" );
+	std::string ReplaceAllOfSymbolInString( const std::string & string, const std::string & targetSymbol, const std::string & replacementSymbol );
+	std::string GetStringComponentBySeparatorIndex( const std::string & str, int index, const std::string & separator );
 
 	enum e_TrimOptions {
 		TRIM_SPACE		= 0x01,
@@ -22,12 +22,12 @@ namespace StringUtilities
 		TRIM_ALL		= 0x07
 	};
 
-	std::string TrimString (std::string text, e_TrimOptions trimOptions = TRIM_ALL);
+	std::string TrimString( const std::string & text, e_TrimOptions trimOptions = TRIM_ALL );
 
-	std::string DecimalToHexadecimal (uint value);
+	std::string DecimalToHexadecimal( uint value );
 
-	std::string ToLower (std::string str);
-	std::string ToUpper (std::string str);
+	std::string ToLower( const std::string & str );
+	std::string ToUpper( const std::string & str );
 }
 
 #endif // _StringUtilities_h_

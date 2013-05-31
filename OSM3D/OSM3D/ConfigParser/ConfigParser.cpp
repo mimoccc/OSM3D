@@ -2,6 +2,7 @@
 #include "ConfigParser.h"
 #include "../Type.h"
 #include "../FileIO/BasicIO.h"
+#include "../Debug.h"
 
 
 ConfigParser::ConfigParser()
@@ -101,9 +102,9 @@ void ConfigParser::SetRealProperty( const std::string & propertyName, double val
 SetBoolProperty
 =================
 */
-void ConfigParser::SetBoolProperty( const std::string & proeprtyName, bool value )
+void ConfigParser::SetBoolProperty( const std::string & propertyName, bool value )
 {
-	m_PropertyMappings[proeprtyName] = RealToString(value);
+	m_PropertyMappings[propertyName] = RealToString(value);
 }
 
 /*
@@ -115,12 +116,41 @@ void ConfigParser::LoadFromFile( const std::string & fileName )
 {
 	/* Get file contents */
 	uint fileSize;
-	byte * fileContents = IO::GetFileContents( fileName, fileSize );
+	byte * fileContents = IO::GetFileContents( fileName, fileSize, 1 );
+	fileContents[fileSize] = 0; // Add null terminator
 	
-	std::string fileData = (char *)fileContents;
+	StringSet fileLines;
+	StringUtilities::SplitStringAtSymbol( (char *)fileContents, "\n", fileLines );
+
 	delete [] fileContents;
 
-	throw;
+	for( auto currentLine : fileLines )
+	{
+		currentLine = StringUtilities::TrimString( currentLine, StringUtilities::TRIM_ALL );
+
+		if( currentLine.length( ) == 0 )
+			continue;
+		if ( currentLine[0] == '#' )
+			continue;
+
+		StringSet statementComponents;
+		StringUtilities::SplitStringAtSymbol( currentLine, "=", statementComponents );
+
+		if( statementComponents.size() != 2 )
+		{
+			Debug::Warning(
+				"Improperly-formatted configuration file statement:\n%s",
+				currentLine.c_str( )
+				);
+
+			continue;
+		}
+
+		std::string symbolName = statementComponents[0];
+		std::string symbolValue = statementComponents[1];
+
+		m_PropertyMappings[symbolName] = symbolValue;
+	}
 }
 
 /*

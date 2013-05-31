@@ -212,16 +212,27 @@ std::string TranslatePath (const std::string & unformattedPath)
 	if (path.find ("..") != path.npos)
 	{
 		// uint currentLocation = path.find_first_of ("..");
-		StringSet results;
-		StringUtilities::SplitStringAtSymbol (path, "/", &results);
+
+		//	StringSet stores by vector, can't use vectors here since iterators are invalidated
+		//		upon modification.
+		std::list<std::string> results;
+
+		//	Manually split the string at / symbols
+		uint currentPosition;
+		while( (currentPosition = path.find( "/" )) != path.npos )
+		{
+			results.push_back( path.substr( 0, currentPosition ) );
+			path = path.substr( currentPosition + 1 );
+		}
+		results.push_back( path );
+
+
 		for (auto iter = results.begin (); iter != results.end (); iter++)
 		{
 			if (*iter == "..")
 			{
 				if (iter != results.begin ())
 				{
-					/* NOTE: Vector iterators are automatically invalidated. */
-
 					//	Erase the previous directory (go one up)
 					auto neighbor = iter;
 					neighbor--;

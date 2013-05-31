@@ -1,25 +1,22 @@
 
 #include "StringUtilities.h"
 
-StringSet * StringUtilities::SplitStringAtSymbol (std::string text, std::string symbol, StringSet * resultsOutOptional)
+void StringUtilities::SplitStringAtSymbol( const std::string & text, const std::string & symbol, StringSet & resultsOut )
 {
-	if (resultsOutOptional == NULL)
-		resultsOutOptional = new StringSet;
+	std::string result( text );
 
 	uint currentPosition;
-	while ((currentPosition = text.find (symbol)) != text.npos)
+	while ((currentPosition = result.find (symbol)) != result.npos)
 	{
-		resultsOutOptional->push_back (text.substr (0, currentPosition));
-		text = text.substr (currentPosition+symbol.size ());
+		resultsOut.push_back (text.substr (0, currentPosition));
+		result = result.substr (currentPosition+symbol.size ());
 	}
 
 	//	At this point we have a string that just doesn't have any of that symbol, just use the rest of the string
-	resultsOutOptional->push_back (text);
-
-	return resultsOutOptional;
+	resultsOut.push_back (result);
 }
 
-uint StringUtilities::GetTermCount (std::string text, std::string term)
+uint StringUtilities::GetTermCount( const std::string & text, const std::string & term)
 {
 	uint termCount = 0;
 	uint findPosition = 0;
@@ -32,32 +29,34 @@ uint StringUtilities::GetTermCount (std::string text, std::string term)
 	return termCount;
 }
 
-std::string StringUtilities::EliminateSymbolFromString (std::string text, std::string symbol)
+std::string StringUtilities::EliminateSymbolFromString( const std::string & text, const std::string & symbol )
 {
+	std::string result( text );
+
 	uint currentPosition;
-	while ((currentPosition = text.find (symbol)) != text.npos)
+	while ((currentPosition = result.find (symbol)) != result.npos)
 	{
-		text.erase (currentPosition, symbol.size ());
+		result.erase (currentPosition, symbol.size ());
 	}
 	return text;
 }
 
-std::string StringUtilities::ConvergeStringSet (StringSet * stringSet, std::string separator)
+std::string StringUtilities::ConvergeStringSet( const StringSet & stringSet, const std::string & separator )
 {
-	if (stringSet->size () == 0)
+	if (stringSet.size () == 0)
 		return 0;
 
 	std::string result;
-	for (auto iter = stringSet->begin (); iter != --(stringSet->end ()); iter++)
+	for (auto iter = stringSet.begin (); iter != --(stringSet.end ()); iter++)
 	{
 		result += *iter + separator;
 	}
-	result += *(--(stringSet->end ()));
+	result += *(--(stringSet.end ()));
 
 	return result;
 }
 
-std::string StringUtilities::TrimString (std::string text, e_TrimOptions trimOptions)
+std::string StringUtilities::TrimString( const std::string & text, e_TrimOptions trimOptions )
 {
 	if (trimOptions == 0)
 		return text;
@@ -86,7 +85,7 @@ std::string StringUtilities::TrimString (std::string text, e_TrimOptions trimOpt
 
 #	define DecimalToHexadecimalCase(hexValue) case (0x##hexValue): result += #hexValue; break;
 //	Here we assume a Big-Endian system
-std::string StringUtilities::DecimalToHexadecimal (uint value)
+std::string StringUtilities::DecimalToHexadecimal( uint value )
 {
 	std::string result = "0x";
 	for (uchar i = 1; i <= sizeof (value)*2; i++)
@@ -117,21 +116,23 @@ std::string StringUtilities::DecimalToHexadecimal (uint value)
 }
 #	undef DecimalToHexadecimalCase
 
-std::string StringUtilities::ReplaceAllOfSymbolInString (std::string string, std::string targetSymbol, std::string replacementSymbol)
+std::string StringUtilities::ReplaceAllOfSymbolInString( const std::string & string, const std::string & targetSymbol, const std::string & replacementSymbol )
 {
+	std::string result( string );
+
 	std::size_t pos;
-	while ((pos = string.find (targetSymbol)) != string.npos)
+	while ((pos = result.find (targetSymbol)) != result.npos)
 	{
-		string.replace (pos, targetSymbol.size (), replacementSymbol);
+		result.replace (pos, targetSymbol.size (), replacementSymbol);
 	}
 
-	return string;
+	return result;
 }
 
-std::string StringUtilities::GetStringComponentBySeparatorIndex (std::string str, int index, std::string separator)
+std::string StringUtilities::GetStringComponentBySeparatorIndex( const std::string & str, int index, const std::string & separator )
 {
 	StringSet dest;
-	SplitStringAtSymbol (str, separator, &dest);
+	SplitStringAtSymbol (str, separator, dest);
 
 	int i = 0;
 	for (auto iter = dest.begin (); iter != dest.end (); iter++, i++)
@@ -143,8 +144,10 @@ std::string StringUtilities::GetStringComponentBySeparatorIndex (std::string str
 	return str;
 }
 
-std::string StringUtilities::ToLower (std::string str)
+std::string StringUtilities::ToLower( const std::string & text )
 {
+	std::string str( text );
+
 	for (uint i = 0; i < str.size (); i++)
 	{
 		str [i] = tolower (str [i]);
@@ -153,8 +156,10 @@ std::string StringUtilities::ToLower (std::string str)
 	return str;
 }
 
-std::string StringUtilities::ToUpper (std::string str)
+std::string StringUtilities::ToUpper( const std::string & text )
 {
+	std::string str( text );
+
 	for (uint i = 0; i < str.size (); i++)
 	{
 		str [i] = toupper (str [i]);
