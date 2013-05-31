@@ -22,3 +22,5 @@ tl;dr:
 
 
 * C++11 has the 'override' keyword in the spec. Use it.
+
+* Tabs are set to 4 spaces wide.

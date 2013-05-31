@@ -3,6 +3,6 @@
 #ifdef _MSC_VER
 
 #pragma comment (lib, "SDL.lib")
-#pragma comment (lib, "SDLmain.lib")
+//#pragma comment (lib, "SDLmain.lib")
 
 #endif
