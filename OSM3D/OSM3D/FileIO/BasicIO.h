@@ -4,8 +4,8 @@
 #include <string>
 #include <list>
 
-#include "../Type.h"
-#include "../StringUtilities.h"
+#include "../Common/Type.h"
+#include "../Core/StringUtilities.h"
 
 //	WinAPI defines this as DeleteFileA/DeleteFileW; we use the name for our own stuff, so
 //		get rid of it

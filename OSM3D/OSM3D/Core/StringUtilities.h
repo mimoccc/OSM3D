@@ -2,7 +2,7 @@
 #ifndef _StringUtilities_h_
 #define _StringUtilities_h_
 
-#include "Type.h"
+#include "../Common/Type.h"
 
 typedef std::vector<std::string> StringSet;
 

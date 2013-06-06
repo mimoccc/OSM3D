@@ -32,4 +32,12 @@
 #  error Compiling for unidentified (and possibly unsupported) platform.
 # endif
 
+#ifdef _MSC_VER
+# ifdef _DEBUG
+#  define OSM3D_DEBUG
+# else
+#  define OSM3D_RELEASE
+# endif
+#endif
+
 #endif // _Platform_h_

@@ -16,7 +16,8 @@
 
 tl;dr:
 = Pointers generally indicate full ownership (which may be shared ownership.) or extended
-	reference, which are considered to be approximately the same.
+	reference, which are considered to be approximately the same. Raw pointer buffers are
+	the only exception, at which point it's contextual.
 = Const references indicate only references to value.
 = A normal reference indicates full access, but not ownership.
 

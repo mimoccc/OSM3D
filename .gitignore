@@ -14,9 +14,17 @@
 
 # Visual Studio Files
 Intermediate/
+Debug/
+Release/
 *.filters
 *.user
 *.suo
+*.exe
+*.ilk
+*.pdb
 
 # Binaries
 bin/
+
+# CFG files are user-specific for development configurations
+*.cfg

@@ -1,8 +1,8 @@
 
 #include "ConfigParser.h"
-#include "../Type.h"
+#include "../Common/Type.h"
+#include "../Core/Debug.h"
 #include "../FileIO/BasicIO.h"
-#include "../Debug.h"
 
 
 ConfigParser::ConfigParser()

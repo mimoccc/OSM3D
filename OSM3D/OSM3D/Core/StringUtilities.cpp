@@ -6,7 +6,7 @@ void StringUtilities::SplitStringAtSymbol( const std::string & text, const std::
 	std::string result( text );
 
 	uint currentPosition;
-	while ((currentPosition = result.find (symbol)) != result.npos)
+	while ((currentPosition = (uint)result.find (symbol)) != result.npos)
 	{
 		resultsOut.push_back (text.substr (0, currentPosition));
 		result = result.substr (currentPosition+symbol.size ());
@@ -20,10 +20,10 @@ uint StringUtilities::GetTermCount( const std::string & text, const std::string 
 {
 	uint termCount = 0;
 	uint findPosition = 0;
-	while ((findPosition = text.find (term, findPosition)) != text.npos)
+	while ((findPosition = (uint)text.find (term, findPosition)) != text.npos)
 	{
 		termCount++;
-		findPosition += term.size ();
+		findPosition += (uint)term.size ();
 	}
 
 	return termCount;
@@ -34,7 +34,7 @@ std::string StringUtilities::EliminateSymbolFromString( const std::string & text
 	std::string result( text );
 
 	uint currentPosition;
-	while ((currentPosition = result.find (symbol)) != result.npos)
+	while ((currentPosition = (uint)result.find (symbol)) != result.npos)
 	{
 		result.erase (currentPosition, symbol.size ());
 	}

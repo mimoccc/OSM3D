@@ -5,10 +5,12 @@
 #include <sstream>
 #include <algorithm>
 #include <vector>
+#include <cstdint>
 
 typedef unsigned char	uchar;
 typedef unsigned short	ushort;
 typedef unsigned int	uint;
+typedef uint64_t		ubigint;
 
 typedef uchar byte;
 

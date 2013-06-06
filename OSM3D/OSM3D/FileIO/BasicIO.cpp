@@ -1,7 +1,7 @@
 
 #include <list>
 
-#include "../Platform.h"
+#include "../Common/Platform.h"
 
 #ifdef OSM3D_PLATFORM_WINDOWS
 #include <Windows.h>
@@ -31,7 +31,7 @@
 #include <stdarg.h>
 #include "String.h"
 
-#include "../Debug.h"
+#include "../Core/Debug.h"
 
 static std::string g_ActiveDirectory = "";
 
@@ -219,7 +219,7 @@ std::string TranslatePath (const std::string & unformattedPath)
 
 		//	Manually split the string at / symbols
 		uint currentPosition;
-		while( (currentPosition = path.find( "/" )) != path.npos )
+		while( (currentPosition = (uint)path.find( "/" )) != path.npos )
 		{
 			results.push_back( path.substr( 0, currentPosition ) );
 			path = path.substr( currentPosition + 1 );
