@@ -4,10 +4,15 @@
 #include "ConfigParser/ConfigParser.h"
 #include "Graphics/worldgl.h"
 
+#include <o5m/o5mpp.h>
+
 #undef main
 int main( int argc, char * argv[] )
 {
 	ConfigParser config( "../../../appinfo.cfg" );
+
+	o5m::StreamSession session;
+	session.BeginSession( config.GetStringProperty( "o5m_source" ) );
 
 	WorldGL::ConstructFrameworks();
 	WorldGL world;
@@ -27,6 +32,8 @@ int main( int argc, char * argv[] )
 	}
 
 	WorldGL::DestructFrameworks();
+
+	session.EndSession( );
 
 	return 0;
 }

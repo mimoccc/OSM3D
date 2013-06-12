@@ -7,4 +7,10 @@
 #pragma comment (lib, "SDL_image.lib")
 #pragma comment (lib, "OpenGL32.lib")
 
+# ifdef _DEBUG
+#  pragma comment (lib, "o5mpp-d.lib")
+# else
+#  pragma comment (lib, "o5mpp.lib")
+# endif
+
 #endif

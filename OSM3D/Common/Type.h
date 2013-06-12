@@ -10,11 +10,13 @@
 typedef unsigned char	uchar;
 typedef unsigned short	ushort;
 typedef unsigned int	uint;
+
+typedef int64_t			bigint;
 typedef uint64_t		ubigint;
 
 typedef uchar byte;
 
-
+typedef std::vector<std::string> StringSet;
 
 
 template <typename T>

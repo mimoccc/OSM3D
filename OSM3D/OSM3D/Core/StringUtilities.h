@@ -4,8 +4,6 @@
 
 #include "../Common/Type.h"
 
-typedef std::vector<std::string> StringSet;
-
 namespace StringUtilities
 {
 	void		SplitStringAtSymbol( const std::string & text, const std::string & symbol, StringSet & resultsOut );
